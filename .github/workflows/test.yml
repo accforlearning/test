@@ -1,0 +1,25 @@
+name : Daily Contribution
+
+on:
+  schedule:
+    - cron: "*/10 * * *"
+
+  jobs:
+    contribute:
+      runs-on: ubuntu-latest
+
+      steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      
+      - name: Create a commit
+        run: |
+          echo "Daily Contribution" >> contribution.txt
+          git config --local user.email "seetharaman523@outlook.com"
+          git config --local user.name "accforlearning"
+          git add contribution.txt
+          git commit -m "Daily Commit"
+          git push
+          rm contribution.txt
+          git commit -m "Daily Commit"
+          git push
